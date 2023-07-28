@@ -15,24 +15,24 @@ using namespace std;
 // /////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T>
- struct SinglyLL 
+ struct SINGLY 
 {
     T Data ; 
-    struct SinglyLL<T> * next ;
-
+    struct SINGLY<T> * next ;
     public : 
-    SinglyLL(T value)
+    SINGLY(T value)
     {
         Data = value;
         next = NULL;
     } 
 };
 
+
 template <class T>
 class SLL
 {   
     private : 
-    struct SinglyLL <T>* Head ; 
+    struct SINGLY <T>* Head ; 
     int iCount  ; 
 
     public : 
@@ -60,7 +60,7 @@ template <class T>
 void SLL <T> :: Display()
 {
     printf("Elememts of Linked List Are : \n");
-    struct SinglyLL < T >  * temp = Head;
+    struct SINGLY < T >  * temp = Head;
     while (temp != nullptr)
     {
         cout<<temp -> Data <<"\t";
@@ -79,7 +79,7 @@ int  SLL <T> :: Count()
 template <class T>
 void SLL <T> :: InsertFirst(T value)
 {
-    struct SinglyLL <T> *  newn  = new SinglyLL(value);
+    struct SINGLY <T> *  newn  = new SINGLY(value);
 
     if ( Head == nullptr)
     {
@@ -97,14 +97,14 @@ void SLL <T> :: InsertFirst(T value)
 template <class T >
 void SLL < T > :: InsertLast ( T value)
 {
-    SinglyLL  < T > * newn = new SinglyLL(value);
+    SINGLY  < T > * newn = new SINGLY(value);
     if ( Head == nullptr)
     {
         Head = newn;
     }
     else 
     {
-        struct SinglyLL < T > * temp = Head;
+        struct SINGLY < T > * temp = Head;
         while ( temp -> next != nullptr)
         {
             temp = temp -> next;
@@ -132,8 +132,8 @@ void SLL < T > :: InsertAtPos( T value , int Pos)
     }
     else 
     {
-        struct SinglyLL <T> * newn  =  new SinglyLL(value);
-        struct SinglyLL <T > * temp = Head;
+        struct SINGLY <T> * newn  =  new SINGLY(value);
+        struct SINGLY <T > * temp = Head;
         for (int iCnt= 1 ; iCnt < Pos - 1 ; iCnt ++)
         {
             temp = temp -> next;
@@ -159,7 +159,7 @@ void SLL <T> :: DeleteFirst ()
     }
     else 
     {
-        struct SinglyLL <T> * temp = Head;
+        struct SINGLY <T> * temp = Head;
         Head = Head -> next;
         delete temp;
     }
@@ -181,7 +181,7 @@ void SLL <T> :: DeleteLast()
     }
     else 
     {
-        struct SinglyLL < T > * temp = Head;
+        struct SINGLY < T > * temp = Head;
         while ( temp -> next -> next != nullptr)
         {
             temp = temp -> next;  
@@ -210,12 +210,12 @@ void SLL < T > :: DeleteAtPos ( int Pos)
     }
     else 
     {
-        struct SinglyLL < T > * temp = Head;
+        struct SINGLY < T > * temp = Head;
         for ( int iCnt = 1 ; iCnt < Pos - 1 ; iCnt++)
         {
             temp = temp -> next;
         }
-        struct SinglyLL<T> * tempX = temp -> next;
+        struct SINGLY<T> * tempX = temp -> next;
         temp -> next = temp -> next -> next;
         delete tempX;
         iCount--;
@@ -234,26 +234,14 @@ void SLL < T > :: DeleteAtPos ( int Pos)
 // /////////////////////////////////////////////////////////////////////////////////////////
 
 
-template<class T >
-struct SinglyCL
-{
-    T Data ; 
-    struct SinglyCL <T> * next;
-    public :
-    SinglyCL ( T value)
-    {
-        this-> next = nullptr;
-        this ->  Data = value;
-    }
-};
 
 template <class T>
 class SCL 
 {
     private : 
         int iCount ;
-        struct SinglyCL <T > * Head ;
-        SinglyCL <T> * Tail = nullptr;  
+        struct SINGLY <T > * Head ;
+        SINGLY <T> * Tail = nullptr;  
     
     public : 
         SCL();
@@ -277,7 +265,7 @@ SCL <T> :: SCL()
 template <class T >
 void SCL <T> :: Display()
 {
-    struct SinglyCL <T> * temp = Head;
+    struct SINGLY <T> * temp = Head;
     if ( Head != nullptr)
     {
         printf("Elements of Linked List Are\n");
@@ -299,7 +287,7 @@ int SCL <T> :: Count()
 template <class T>
 void SCL <T> :: InsertFirst ( T value)
 {
-    struct SinglyCL <T> * newn = new SinglyCL ( value);
+    struct SINGLY <T> * newn = new SINGLY ( value);
     
     if (Head == nullptr && Tail == nullptr)
     {
@@ -319,7 +307,7 @@ void SCL <T> :: InsertFirst ( T value)
 template <class T > 
 void SCL <T> :: InsertLast ( T value)
 {
-    struct SinglyCL <T> * newn = new SinglyCL ( value);
+    struct SINGLY <T> * newn = new SINGLY ( value);
     if ( Head == nullptr && Tail == nullptr)
     {
         Head = newn ;
@@ -352,8 +340,8 @@ void SCL <T> :: InsertAtPos (T value , int Pos)
     }
     else 
     {
-        struct SinglyCL <T> * newn = new SinglyCL ( value);
-        struct SinglyCL <T> * temp = Head;
+        struct SINGLY <T> * newn = new SINGLY ( value);
+        struct SINGLY <T> * temp = Head;
 
         for ( int iCnt = 1 ; iCnt < Pos - 1 ; iCnt ++)
         {
@@ -401,7 +389,7 @@ void SCL <T> :: DeleteLast ()
     }
     else 
     {
-        struct SinglyCL <T> * temp = Head;
+        struct SINGLY <T> * temp = Head;
         while ( temp -> next -> next != Head)
         {
             temp = temp -> next;
@@ -431,12 +419,12 @@ void SCL <T> :: DeleteAtPos( int Pos)
     } 
     else
     {
-        struct SinglyCL <T> * temp = Head;
+        struct SINGLY <T> * temp = Head;
         for ( int iCnt = 1 ; iCnt < Pos -1 ; iCnt ++)
         {
             temp = temp -> next;
         }
-        struct SinglyCL <T> * tempX = temp -> next;
+        struct SINGLY <T> * tempX = temp -> next;
         temp -> next = temp -> next -> next;
         delete tempX;
         iCount--;
@@ -455,13 +443,13 @@ void SCL <T> :: DeleteAtPos( int Pos)
 // /////////////////////////////////////////////////////////////////////////////////////////
 
 template <class T >
-struct DoublyLL
+struct DOUBLY
 {
     T Data ; 
-    DoublyLL <T> * next;
-    DoublyLL <T>* prev ;
+    DOUBLY <T> * next;
+    DOUBLY <T>* prev ;
     public : 
-    DoublyLL (  T value )
+    DOUBLY (  T value )
     {
         next = nullptr;
         prev= nullptr;
@@ -474,12 +462,13 @@ class DLL
 {
     private : 
         int iCount;
-        struct DoublyLL <T> * Head;
-        struct DoublyLL <T> * Tail;
+        struct DOUBLY <T> * Head;
+        struct DOUBLY <T> * Tail;
 
     public : 
         DLL();
         void Display ();
+        void DisplayRev ();
         int Count();
         void InsertFirst(T value);
         void InsertLast(T value);
@@ -507,13 +496,29 @@ void DLL <T> :: Display()
 {
     if ( Head != nullptr && Tail != nullptr)
     {
-        struct DoublyLL <T> * temp = Head; 
+        struct DOUBLY <T> * temp = Head; 
         printf("Elements of Linked List Are  : \n");
-        do 
+        while ( temp != nullptr )
         {
-            cout<<temp -> Data<<"\t";
+            cout<<temp-> Data <<"\t";
             temp = temp -> next;
-        }while ( temp != Head);
+        }
+    }
+    cout<<endl;
+}
+
+template <class T >
+void DLL <T> :: DisplayRev()
+{
+    if ( Head != nullptr && Tail != nullptr)
+    {
+        struct DOUBLY <T> * temp = Tail; 
+        printf("Elements of Linked List Are  : \n");
+        while ( temp != nullptr )
+        {
+            cout<<temp-> Data <<"\t";
+            temp = temp -> prev;
+        }
     }
     cout<<endl;
 }
@@ -521,7 +526,7 @@ void DLL <T> :: Display()
 template <class T >
 void DLL <T> :: InsertFirst(T value)
 {
-    struct DoublyLL <T> *  newn  = new DoublyLL(value);
+    struct DOUBLY <T> *  newn  = new DOUBLY(value);
 
     if ( Head == nullptr)
     {
@@ -534,7 +539,7 @@ void DLL <T> :: InsertFirst(T value)
         Head -> prev = newn ;
         Head =  newn;
     }
-    Tail -> next = Head;
+    
 
     iCount++;
 } 
@@ -542,7 +547,7 @@ void DLL <T> :: InsertFirst(T value)
 template <class T>
 void DLL <T> :: InsertLast( T value)
 {
-    struct DoublyLL <T> *  newn  = new DoublyLL(value);
+    struct DOUBLY <T> *  newn  = new DOUBLY(value);
 
     if ( Head == nullptr)
     {
@@ -553,6 +558,7 @@ void DLL <T> :: InsertLast( T value)
     {
         Tail -> next = newn ;
         newn -> prev = Tail;
+        Tail = Tail -> next;
     }
     iCount++;
 }
@@ -575,8 +581,8 @@ void DLL <T> :: InsertAtPos( T value , int Pos)
     }
     else 
     {
-        struct SinglyLL <T> * newn  =  new SinglyLL(value);
-        struct SinglyLL <T > * temp = Head;
+        struct DOUBLY <T> * newn  =  new DOUBLY(value);
+        struct DOUBLY <T > * temp = Head;
         for (int iCnt= 1 ; iCnt < Pos - 1 ; iCnt ++)
         {
             temp = temp -> next;
@@ -635,8 +641,9 @@ void DLL <T> :: DeleteLast()
     {
         Tail = Tail -> prev ; 
         delete Tail -> next;
+        Tail -> next = nullptr;
+        
     }
-    Tail -> next = Head;
     iCount--;
 }
 
@@ -658,7 +665,241 @@ void DLL <T> :: DeleteAtPos ( int Pos)
     }
     else 
     {
-        struct DoublyLL < T > * temp = Head;
+        struct DOUBLY < T > * temp = Head;
+        for ( int iCnt = 1 ; iCnt < Pos - 1 ; iCnt++)
+        {
+            temp = temp -> next;
+        }
+
+        temp -> next = temp -> next -> next;
+        delete temp -> next -> prev;
+        temp -> next -> prev = temp;
+
+        iCount--;
+    }
+}
+// /////////////////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////////////////
+
+//          Doubly Linear Linked List         //
+//                          Roshan Patl ( 28 July)
+
+// /////////////////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////////////////
+
+
+template < class T>
+class DCL
+{
+    private : 
+        int iCount;
+        struct DOUBLY <T> * Head;
+        struct DOUBLY <T> * Tail;
+
+    public : 
+        DCL();  
+        void Display ();
+        void DisplayRev ();
+        int Count();
+        void InsertFirst(T value);
+        void InsertLast(T value);
+        void InsertAtPos(T value , int Pos);
+        void DeleteAtPos(  int Pos);
+        void DeleteFirst ( );
+        void DeleteLast ();
+};
+
+template <class T>
+DCL <T> :: DCL()
+{
+    iCount = 0 ; 
+    this-> Head = nullptr;
+}
+
+template <class T>
+int  DCL <T> :: Count()
+{
+    return iCount;
+} 
+
+template <class T >
+void DCL <T> :: Display()
+{
+    if ( Head != nullptr && Tail != nullptr)
+    {
+        struct DOUBLY <T> * temp = Head; 
+        printf("Elements of Linked List Are  : \n");
+        do 
+        {
+            cout<<temp -> Data<<"\t";
+            temp = temp -> next;
+        }while ( temp != Head);
+    }
+    cout<<endl;
+}
+
+template <class T>
+void DCL <T> :: DisplayRev()
+{
+    if ( Head != nullptr && Tail != nullptr)
+    {
+        struct DOUBLY <T> * temp = Tail; 
+        printf("Elements of Linked List Are  : \n");
+        do 
+        {
+            cout<<temp -> Data<<"\t";
+            temp = temp -> prev;
+        }while ( temp != Tail);
+    }
+    cout<<endl;
+}
+template <class T >
+void DCL <T> :: InsertFirst(T value)
+{
+    struct DOUBLY <T> *  newn  = new DOUBLY(value);
+
+    if ( Head == nullptr)
+    {
+        Head = newn;
+        Tail = newn;
+    }
+    else 
+    {
+        newn -> next =  Head;
+        Head -> prev = newn ;
+        Head = newn ;
+    }
+    Head -> prev = Tail;
+    Tail -> next = Head;
+
+    iCount++;
+} 
+
+template <class T>
+void DCL <T> :: InsertLast( T value)
+{
+    struct DOUBLY <T> *  newn  = new DOUBLY(value);
+
+    if ( Head == nullptr)
+    {
+        Head = newn;
+        Tail = newn;
+    }
+    else 
+    {
+        Tail -> next = newn ;
+        newn -> prev = Tail;
+        Tail = Tail -> next;
+    }
+    Tail -> next = Head;
+    Head -> prev = Tail;
+    iCount++;
+}
+
+template <class T>
+void DCL <T> :: InsertAtPos( T value , int Pos)
+{
+    if ( (Pos > iCount + 1 ) || ( Pos < 1))
+    {
+        printf("InValid Position \n ");
+        return ;
+    }
+     if ( Pos == 1)
+    {
+        InsertFirst(value);
+    }
+    else if ( Pos == iCount+1)
+    {
+        InsertLast(value);
+    }
+    else 
+    {
+        struct DOUBLY <T> * newn  =  new DOUBLY(value);
+        struct DOUBLY <T > * temp = Head;
+        for (int iCnt= 1 ; iCnt < Pos - 1 ; iCnt ++)
+        {
+            temp = temp -> next;
+        }
+
+        newn -> next  =  temp -> next;
+        temp -> next -> prev = newn;
+
+        temp -> next = newn ;
+        newn -> prev = temp;
+
+        iCount++;
+    }
+}
+
+template <class T >
+void DCL  < T> :: DeleteFirst()
+{
+    if ( Head == nullptr && Tail == nullptr)
+    {
+        printf("Linked List Is Empty\n");
+        return ;
+    }
+    else if ( Head == Tail)
+    {
+        delete Head ; 
+        Head = nullptr ; 
+        Tail = nullptr;
+    }
+    else 
+    {
+        Head = Head -> next;
+        delete Tail -> next;
+    }
+    Head -> prev = Tail;
+    Tail -> next = Head;
+    iCount--;
+}
+
+template <class T >
+void DCL <T> :: DeleteLast()
+{
+    if ( Head == nullptr && Tail == nullptr)
+    {
+        printf("Linked List Is Empty\n");
+        return ;
+    }
+    else if ( Head == Tail)
+    {
+        delete Head ; 
+        Head = nullptr ; 
+        Tail = nullptr;
+    }
+    else 
+    {
+        Tail = Tail -> prev ; 
+        delete Head -> prev;    
+    }
+    Tail -> next = Head;
+    Head -> prev = Tail;
+    iCount--;
+}
+
+template <class T>
+void DCL <T> :: DeleteAtPos ( int Pos)
+{
+    if (( Pos < 1  )  | ( Pos > iCount) )
+    {
+        printf("Invalid Position \n");
+        return ;
+    }
+    if ( Pos == 1)
+    {
+        DeleteFirst();
+    }
+    else if ( Pos == iCount)
+    {
+        DeleteLast();
+    }
+    else 
+    {
+        struct DOUBLY < T > * temp = Head;
         for ( int iCnt = 1 ; iCnt < Pos - 1 ; iCnt++)
         {
             temp = temp -> next;
@@ -684,40 +925,30 @@ void DLL <T> :: DeleteAtPos ( int Pos)
 // /////////////////////////////////////////////////////////////////////////////////////////
 
 
-int main()
-{
-    DLL < string > lobj;
-    // lobj.InsertFirst('A');
-    // lobj.InsertLast ( 'B');
-    // lobj.InsertLast ( 'D');
-    // lobj.InsertAtPos('C' , 3);
-    // lobj.InsertLast ( 'E');
-    // lobj.InsertLast ( 'F');
-    // lobj.InsertLast ( 'G');
-    // lobj.InsertLast ( 'H');
-    // lobj.InsertLast ( 'I');
-    // lobj.InsertLast ( 'J');
+// int main()
+// {
+//     DLL < char > lobj;
+//     lobj.InsertFirst('A');
+//     lobj.InsertLast ( 'B');
+//     lobj.InsertLast ( 'D');
+//     lobj.InsertAtPos('C' , 3);
+//     lobj.InsertLast ( 'E');
+//     lobj.InsertLast ( 'F');
+//     lobj.InsertLast ( 'G');
+//     lobj.InsertLast ( 'H');
+//     lobj.InsertLast ( 'I');
+//     lobj.InsertLast ( 'J');
 
-    lobj.InsertFirst("Roshan");
-    lobj.InsertFirst("Roshan");
-    lobj.InsertFirst("Roshan");
-    lobj.InsertFirst("Roshan");
-    lobj.InsertFirst("Roshan");
-    lobj.InsertFirst("Roshan");
-    lobj.InsertFirst("Roshan");
-    lobj.InsertFirst("Roshan");
-    lobj.InsertFirst("Roshan");
-    lobj.InsertFirst("Roshan");
+//     cout<<lobj.Count()<<endl;
+//     lobj.Display();
+//     lobj.DeleteFirst();
+//     lobj.DeleteLast();
+//     cout<<lobj.Count()<<endl;
+//     lobj.Display();
+//     lobj.DeleteAtPos(4);
+//     cout<<lobj.Count()<<endl;
+//     lobj.Display();
+//     lobj.DisplayRev();
 
-    cout<<lobj.Count()<<endl;
-    lobj.Display();
-    lobj.DeleteFirst();
-    lobj.DeleteLast();
-    cout<<lobj.Count()<<endl;
-    lobj.Display();
-    lobj.DeleteAtPos(4);
-    cout<<lobj.Count()<<endl;
-    lobj.Display();
-
-    return 0;
-}
+//     return 0;
+// }
