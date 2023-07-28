@@ -1,5 +1,6 @@
-#include "GDSB.cpp"
+// #include "GDSL.cpp"
 #include<iostream>
+using namespace std;
 
 int main()
 {
@@ -26,9 +27,8 @@ int main()
     obj.DeleteAtPos(3);
     obj.Display();
     obj.DisplayRev
-    
     ();
-    cout<<"Count is \t"<<obj.Count()<<endl;;
+    cout<<"Count is \t"<<obj.Count()<<endl;
     return 0;
 
 }
