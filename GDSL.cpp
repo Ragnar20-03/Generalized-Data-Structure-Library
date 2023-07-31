@@ -41,7 +41,7 @@ class SLL
     int Count();
     void Display();
     void InsertFirst( T value ) ; 
-    void InsertLast ( T value );
+    void Insert ( T value );
     void InsertAtPos ( T value , int Pos);
     void DeleteFirst();
     void DeleteLast();
@@ -95,7 +95,7 @@ void SLL <T> :: InsertFirst(T value)
 }
 
 template <class T >
-void SLL < T > :: InsertLast ( T value)
+void SLL < T > :: Insert ( T value)
 {
     SINGLY  < T > * newn = new SINGLY(value);
     if ( Head == nullptr)
@@ -128,7 +128,7 @@ void SLL < T > :: InsertAtPos( T value , int Pos)
     }
     else if ( Pos == iCount+1)
     {
-        InsertLast(value);
+        Insert(value);
     }
     else 
     {
@@ -248,7 +248,7 @@ class SCL
         void Display();
         int Count();
         void InsertFirst (T value);
-        void InsertLast (T value);
+        void Insert (T value);
         void InsertAtPos (T value , int Pos);
         void DeleteFirst ();
         void DeleteLast ();
@@ -305,7 +305,7 @@ void SCL <T> :: InsertFirst ( T value)
 }
 
 template <class T > 
-void SCL <T> :: InsertLast ( T value)
+void SCL <T> :: Insert ( T value)
 {
     struct SINGLY <T> * newn = new SINGLY ( value);
     if ( Head == nullptr && Tail == nullptr)
@@ -336,7 +336,7 @@ void SCL <T> :: InsertAtPos (T value , int Pos)
     }
     else if ( Pos == iCount + 1)
     {
-        InsertLast(value);
+        Insert(value);
     }
     else 
     {
@@ -471,7 +471,7 @@ class DLL
         void DisplayRev ();
         int Count();
         void InsertFirst(T value);
-        void InsertLast(T value);
+        void Insert(T value);
         void InsertAtPos(T value , int Pos);
         void DeleteAtPos(  int Pos);
         void DeleteFirst ( );
@@ -545,7 +545,7 @@ void DLL <T> :: InsertFirst(T value)
 } 
 
 template <class T>
-void DLL <T> :: InsertLast( T value)
+void DLL <T> :: Insert( T value)
 {
     struct DOUBLY <T> *  newn  = new DOUBLY(value);
 
@@ -577,7 +577,7 @@ void DLL <T> :: InsertAtPos( T value , int Pos)
     }
     else if ( Pos == iCount+1)
     {
-        InsertLast(value);
+        Insert(value);
     }
     else 
     {
@@ -704,7 +704,7 @@ class DCL
         void DisplayRev ();
         int Count();
         void InsertFirst(T value);
-        void InsertLast(T value);
+        void Insert(T value);
         void InsertAtPos(T value , int Pos);
         void DeleteAtPos(  int Pos);
         void DeleteFirst ( );
@@ -778,7 +778,7 @@ void DCL <T> :: InsertFirst(T value)
 } 
 
 template <class T>
-void DCL <T> :: InsertLast( T value)
+void DCL <T> :: Insert( T value)
 {
     struct DOUBLY <T> *  newn  = new DOUBLY(value);
 
@@ -812,7 +812,7 @@ void DCL <T> :: InsertAtPos( T value , int Pos)
     }
     else if ( Pos == iCount+1)
     {
-        InsertLast(value);
+        Insert(value);
     }
     else 
     {
@@ -918,6 +918,214 @@ void DCL <T> :: DeleteAtPos ( int Pos)
 // /////////////////////////////////////////////////////////////////////////////////////////
 // /////////////////////////////////////////////////////////////////////////////////////////
 
+//          Binary Search Tree         //
+//                          Roshan Patl ( 28 July)
+
+// /////////////////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+struct Binary
+{
+    struct Binary  * rchild ; 
+    struct Binary  * lchild ; 
+    T  Data;   
+
+    public:
+    Binary(T value)
+    {
+        rchild = nullptr;
+        lchild = nullptr;
+        Data = value;
+    }
+};
+
+template <class T>
+class BST 
+{
+    private :
+    int iCount;
+
+    public : 
+    struct Binary <T>* Head ; 
+    BST ();
+    void Insert(T value);
+    int CountNodes();
+    int CountLeaf(struct Binary <T> * );
+    int CountParent(struct Binary <T> *);
+    bool Search (struct Binary  <T>* temp , T);
+    void DisplayPreorder(struct Binary <T> * );
+    void DisplayInorder(struct Binary <T> * );
+    void DisplayPostorder(struct Binary <T> * );
+};
+
+template <class T>
+BST <T> :: BST()
+{
+    Head = NULL;
+    iCount = 0 ; 
+}
+
+template <class T>
+void BST <T> :: Insert(T value)
+{   
+    struct Binary <T> * newn = new Binary(value);
+    struct Binary <T> * temp = Head;
+    if (Head == NULL)
+    {
+        Head = newn;
+    }
+    else 
+    {
+        while (temp != nullptr)
+        {
+            if ( value == temp -> Data)
+            {
+                printf("Duplicate Elemet Found \n");
+                return ;
+            }
+            if ( value > temp -> Data)
+            {
+                if ( temp -> rchild == nullptr)
+                {
+                    temp -> rchild = newn;
+                    break;
+                }
+                else 
+                {
+                    temp = temp -> rchild;
+                }
+            }
+            else if ( value < temp -> Data)
+            {
+                if ( temp -> lchild == nullptr)
+                {
+                    temp -> lchild = newn ;
+                    break;
+                }
+                else 
+                {
+                    temp = temp -> lchild;
+                }
+            }
+        }
+    }
+    iCount++;
+
+}
+
+template <class T>
+int BST <T> :: CountNodes()
+{
+    return iCount;
+}
+
+template <class T>
+int BST <T> :: CountLeaf(struct Binary <T>* temp )
+{
+    static int iCountL = 0 ;
+    if ( temp != nullptr)
+    {
+        if ( temp -> rchild == nullptr && temp -> lchild == nullptr)
+        {
+            iCountL++;
+        }
+        CountLeaf (temp -> lchild);
+        CountLeaf(temp-> rchild);
+    }
+    return iCountL;
+}
+
+template <class T>
+int BST <T> :: CountParent(struct Binary <T>* temp)
+{
+    static int iCountP = 0 ; ;
+    if ( temp != NULL)
+    {
+        if ( temp -> lchild != nullptr && temp -> rchild != nullptr)
+        {
+            iCountP ++;
+        }
+        CountParent ( temp -> lchild);
+        CountParent ( temp -> rchild);
+    }
+
+    return iCountP;
+}
+
+template <class T>
+bool BST <T> :: Search(struct Binary<T> * temp ,  T value)
+{   
+    bool bFlag = false;
+    
+    if ( temp == nullptr)
+    {
+        printf("Linked List is Empty \n");
+        return false;
+    }
+    else 
+    {
+        while (temp != nullptr)
+        {
+            if ( temp -> Data == value)
+            {
+                bFlag = true;
+                break;
+            }
+            else if (value < temp -> Data)
+            {
+                temp  = temp -> lchild;
+            }
+            else if ( value > temp -> Data)
+            {
+                temp  = temp -> rchild;
+            }
+        }
+
+    }
+    return bFlag;
+}
+
+
+template <class T>
+void BST < T > ::  DisplayPreorder( struct Binary <T>  * temp  )
+{
+    if ( temp != nullptr)
+    {
+        cout<<temp -> Data <<"\t";
+        DisplayPreorder(temp -> lchild);
+        DisplayPreorder(temp -> rchild);
+    }  
+}
+
+template <class T>
+void BST < T > ::  DisplayPostorder( struct Binary  <T> *temp  )
+{
+    if ( temp != nullptr)
+    {
+        DisplayPostorder(temp -> lchild);
+        DisplayPostorder(temp -> rchild);
+        cout<<temp -> Data << "\t";
+    }
+}
+
+template <class T>
+void BST < T > ::  DisplayInorder( struct Binary <T> *  temp  )
+{
+        if ( temp != nullptr)
+    {
+        DisplayInorder(temp -> lchild);
+        cout<<temp -> Data << "\t";
+        DisplayInorder(temp -> rchild);
+    }
+}
+
+
+// /////////////////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////////////////
+
 //          Starter Function         //
 
 // /////////////////////////////////////////////////////////////////////////////////////////
@@ -925,30 +1133,27 @@ void DCL <T> :: DeleteAtPos ( int Pos)
 // /////////////////////////////////////////////////////////////////////////////////////////
 
 
-// int main()
-// {
-//     DLL < char > lobj;
-//     lobj.InsertFirst('A');
-//     lobj.InsertLast ( 'B');
-//     lobj.InsertLast ( 'D');
-//     lobj.InsertAtPos('C' , 3);
-//     lobj.InsertLast ( 'E');
-//     lobj.InsertLast ( 'F');
-//     lobj.InsertLast ( 'G');
-//     lobj.InsertLast ( 'H');
-//     lobj.InsertLast ( 'I');
-//     lobj.InsertLast ( 'J');
+int main()
+{
+    BST < char > lobj;
+    lobj.Insert('A');
+    lobj.Insert ( 'B');
+    lobj.Insert ( 'D');
+    lobj.Insert('C' );
+    lobj.Insert ( 'E');
+    lobj.Insert ( 'F');
+    lobj.Insert ( 'G');
+    lobj.Insert ( 'H');
+    lobj.Insert ( 'I');
+    lobj.Insert ( 'J');
 
-//     cout<<lobj.Count()<<endl;
-//     lobj.Display();
-//     lobj.DeleteFirst();
-//     lobj.DeleteLast();
-//     cout<<lobj.Count()<<endl;
-//     lobj.Display();
-//     lobj.DeleteAtPos(4);
-//     cout<<lobj.Count()<<endl;
-//     lobj.Display();
-//     lobj.DisplayRev();
+    cout<<lobj.CountNodes()<<endl;
+    lobj.DisplayPreorder(lobj.Head);
+    cout<<lobj.CountParent(lobj.Head)<<endl;
+    lobj.DisplayPreorder(lobj.Head);
+    // cout<<lobj.Count()<<endl;
+    lobj.DisplayPreorder(lobj.Head);
+    lobj.DisplayPreorder(lobj.Head);
 
-//     return 0;
-// }
+    return 0;
+}
