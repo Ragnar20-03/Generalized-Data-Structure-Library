@@ -1126,34 +1126,153 @@ void BST < T > ::  DisplayInorder( struct Binary <T> *  temp  )
 // /////////////////////////////////////////////////////////////////////////////////////////
 // /////////////////////////////////////////////////////////////////////////////////////////
 
+//          Stack      //
+//                          Roshan Patl ( 7 Aug)
+
+// /////////////////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////////////////
+
+template <class T>
+struct STK
+{
+    T Data ; 
+    struct STK * next;
+
+    STK(T data)
+    {
+        this->Data = data;
+        this->next = nullptr;
+    }
+};
+
+template <class T >
+class Stack 
+{
+    private : 
+    int iCount ;
+    struct STK <T> * Head;
+
+    public : 
+    Stack();
+    void push(T  );
+    T Pop ( );
+    void Display();
+    int  Count(); 
+    T top();
+};
+
+template <class T>
+Stack<T> :: Stack()
+{
+    this-> Head = nullptr;
+    this -> iCount = 0;
+}
+template <class T>
+void Stack <T> :: push(T Data)
+{
+   struct  STK <T>* newn = new STK ( Data);
+    if ( Head == nullptr)
+    {
+        Head = newn;
+    }
+    else
+    {
+       struct  STK  <T>* temp = Head ; 
+        while (temp -> next != nullptr)
+        {
+            temp = temp -> next;
+        }
+        temp -> next = newn;
+    }
+    iCount ++;
+}
+
+template <class T>
+T Stack<T> :: Pop()
+{
+        struct STK <T> * temp = Head ; 
+
+    T Value ;
+
+     if ( Head != nullptr && iCount == 1 )
+    {
+        Value = temp -> Data;
+        delete Head ; 
+        Head = nullptr; 
+
+    }
+    else {
+        while ( temp -> next -> next != nullptr)
+        {
+            temp = temp -> next;
+        } 
+        Value = temp -> next -> Data;
+        delete temp -> next;
+        temp -> next = nullptr;
+    }
+    return Value;
+    iCount --;
+}
+
+template <class T>
+int Stack<T> :: Count(){
+    return iCount;
+} 
+
+template <class T>
+void Stack<T> :: Display()
+{
+    if ( Head != nullptr)
+    {
+        struct STK <T> * temp = Head ;  
+        while (temp != nullptr )
+        {
+            cout<<temp-> Data<<endl;
+            temp = temp -> next;
+        }
+    }
+    printf("\n");
+}
+
+template <class T>
+T Stack<T>::top()
+{
+    T Value ; 
+    if ( Head != nullptr)
+    {
+        struct STK<T> * temp = Head;
+        while ( temp -> next != nullptr)
+        {
+            temp = temp -> next;
+        }
+        Value =  temp -> Data;
+    }
+    return Value    ;
+}
+
+// /////////////////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////////////////
+// /////////////////////////////////////////////////////////////////////////////////////////
+
 //          Starter Function         //
 
 // /////////////////////////////////////////////////////////////////////////////////////////
 // /////////////////////////////////////////////////////////////////////////////////////////
 // /////////////////////////////////////////////////////////////////////////////////////////
-
-
 int main()
 {
-    BST < char > lobj;
-    lobj.Insert('A');
-    lobj.Insert ( 'B');
-    lobj.Insert ( 'D');
-    lobj.Insert('C' );
-    lobj.Insert ( 'E');
-    lobj.Insert ( 'F');
-    lobj.Insert ( 'G');
-    lobj.Insert ( 'H');
-    lobj.Insert ( 'I');
-    lobj.Insert ( 'J');
+    Stack <char> sobj;
+    sobj.push('A');
+    sobj.push('B');
+    sobj.push('C');
+    sobj.push('D');
+     
+     sobj.Display();
 
-    cout<<lobj.CountNodes()<<endl;
-    lobj.DisplayPreorder(lobj.Head);
-    cout<<lobj.CountParent(lobj.Head)<<endl;
-    lobj.DisplayPreorder(lobj.Head);
-    // cout<<lobj.Count()<<endl;
-    lobj.DisplayPreorder(lobj.Head);
-    lobj.DisplayPreorder(lobj.Head);
+    cout<<sobj.top()<<endl;
+     sobj.Display();
+
 
     return 0;
 }
